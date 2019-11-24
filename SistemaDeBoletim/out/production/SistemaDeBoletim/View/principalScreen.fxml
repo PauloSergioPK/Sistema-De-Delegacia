@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="657.0" prefWidth="1177.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.principalScreenController">
+   <children>
+      <AnchorPane layoutX="249.0" layoutY="618.0" prefHeight="39.0" prefWidth="929.0" style="-fx-background-color: #8b0303; -fx-opacity: 0.8;">
+         <children>
+            <Label layoutX="23.0" layoutY="7.0" prefHeight="26.0" prefWidth="294.0" text="Total de boletins cadastrados : " textFill="WHITE">
+               <font>
+                  <Font name="Candara" size="22.0" />
+               </font>
+            </Label>
+            <Label layoutX="476.0" layoutY="9.0" prefHeight="26.0" prefWidth="314.0" text="Total de suspeitos cadastrados : " textFill="WHITE">
+               <font>
+                  <Font name="Candara" size="22.0" />
+               </font>
+            </Label>
+            <Label fx:id="totalBoletins" layoutX="313.0" layoutY="5.0" prefHeight="21.0" prefWidth="154.0" textFill="#25e5d9">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Label fx:id="totalSuspeitos" layoutX="775.0" layoutY="8.0" prefHeight="21.0" prefWidth="154.0" textFill="#25e5d9">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+         </children></AnchorPane>
+      <AnchorPane prefHeight="658.0" prefWidth="250.0" style="-fx-background-color: #141414;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <effect>
+            <DropShadow blurType="GAUSSIAN" height="101.06" radius="38.17" spread="0.09" width="53.62" />
+         </effect>
+         <children>
+            <Button layoutY="187.0" mnemonicParsing="false" onAction="#cadastrarOcorrencia" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #c94747; -fx-background-radius: 0;" text="Cadastrar Boletim" textFill="WHITE" AnchorPane.topAnchor="180.0">
+               <font>
+                  <Font name="Gadugi" size="23.0" />
+               </font>
+            </Button>
+            <Button layoutY="273.0" mnemonicParsing="false" onAction="#removerOcorrencia" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #c94747; -fx-background-radius: 0;" text="Remover Boletim" textFill="WHITE" AnchorPane.topAnchor="270.0">
+               <font>
+                  <Font name="Gadugi" size="23.0" />
+               </font>
+            </Button>
+            <Button layoutY="357.0" mnemonicParsing="false" onAction="#atualizarOcorrencia" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #c94747; -fx-background-radius: 0;" text="Atualizar Boletim" textFill="WHITE" AnchorPane.topAnchor="360.0">
+               <font>
+                  <Font name="Gadugi" size="23.0" />
+               </font>
+            </Button>
+            <Button layoutY="443.0" mnemonicParsing="false" onAction="#realizarConsulta" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #c94747; -fx-background-radius: 0;" text="Realizar Consultas" textFill="WHITE" AnchorPane.topAnchor="450.0">
+               <font>
+                  <Font name="Gadugi" size="23.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="50.0" fitWidth="33.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#sair" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Resources/butaoDesligar.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <ImageView fitHeight="331.0" fitWidth="334.0" layoutX="552.0" layoutY="126.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Resources/f9378cddaa4d327b39cca8eaad984fe6.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

@@ -1,0 +1,120 @@
+create table Endereco(
+	idEndereco integer,
+	cep varchar(30),
+	cidade varchar(30) not null,
+	estado varchar(30) not null,
+	pais varchar(40) not null,
+	rua varchar(100),
+	numero integer,
+	numeroResidencia integer,
+	complemento varchar(100),
+	bairro varchar(30),
+	constraint enderecoPK primary key(idEndereco)
+);
+
+create table Cidadao(
+	cpf varchar(14) not null,
+	rg varchar(50) not null,
+	dataNascimento varchar(20) not null,
+	nacionalidade varchar(50) not null,
+	sexo varchar(20) not null,
+	estadoCivil varchar(30),
+	nome varchar(100) not null,
+	profissao varchar(50) ,
+	nomeDaMae varchar(100) not null,
+	nomeDoPai varchar(100) not null,
+	idade integer not null,
+	endereco integer not null,
+	constraint cidadaoPK primary key (cpf),
+	constraint enderecoFK foreign key (endereco) references Endereco (idEndereco)
+);
+
+create table Telefone(
+	numTelefone varchar(30) not null,
+	cidadao varchar(14) not null,
+	constraint telefonePK primary key (numTelefone),
+	constraint cidadaoFK foreign key (cidadao) references Cidadao (cpf)
+);
+
+create table Boletim(
+	idBoletim integer,
+	dataComunicacao varchar(20) not null,
+	dataElaboracao varchar(20) not null,
+	relato varchar(2000) not null,
+	vitima varchar(14) not null,
+	constraint boletimPK primary key (idBoletim),
+	constraint vitimaFK foreign key (vitima) references Cidadao (cpf)
+	
+);
+
+create table Delito(
+	idDelito integer,
+	especie varchar(50) not null,
+	natureza varchar(50) not null,
+	flagrante bool not null,
+	dataOcorrencia varchar(20) not null,
+	localOcorrencia integer not null,
+	tipoDeLocal varchar(50) not null,
+	boletim integer not null,
+	constraint delitoPK primary key (idDelito),
+	constraint enderecoFK foreign key (localOcorrencia) references Endereco (idEndereco),
+	constraint boletimFK foreign key (boletim) references Boletim (idBoletim)
+);
+
+create table Suspeito(
+	idSuspeito integer,
+	investigado varchar(14),
+	descricao varchar(100),
+	delito integer,
+	constraint suspeitoPK primary key (idSuspeito),
+	constraint cidadaoFK foreign key (investigado) references Cidadao (cpf),
+	constraint delitoFK foreign key (delito) references Delito (idDelito)
+);
+
+
+CREATE VIEW suspeitosDeUmDelito as (select D.iddelito,D.boletim from 
+delito D inner join boletim B on (D.boletim = B.idboletim) 
+inner join Suspeito S on (S.delito = D.iddelito) group by D.iddelito);
+
+-- VERIFICA SE O CIDADAO ESTÁ VINCULADO A ALGUM BOLETIM (É VITIMA OU SUSPEITO)
+
+CREATE FUNCTION verCidadao(cpf varchar) 
+Returns bool AS $$
+    BEGIN
+        IF (select count(vitima) from boletim where vitima = cpf) > 0 THEN
+            RETURN true;
+        ELSE
+            Return false;
+        END IF;
+    END;
+$$ LANGUAGE plpgsql;
+
+-- DELETA O CIDADAO E SEUS NUMEROS DE TELEFONE CASO CASO ELE NÃO ESTEJA CADASTRADO COMO VITIMA OU SUSPEITO EM ALGUM BOLETIM
+
+CREATE FUNCTION delCidadao (cpfi varchar)
+Returns void AS $$
+    DECLARE ed int; 
+    BEGIN
+        IF NOT (select verCidadao(cpfi)) THEN
+            ed := (SELECT endereco FROM Cidadao where cpf = cpfi);
+            DELETE FROM Telefone WHERE  cidadao = cpfi;
+            DELETE FROM Cidadao  WHERE  cpf = cpfi;
+	    DELETE FROM Endereco where idEndereco = ed;
+            
+        END IF;
+    END;
+$$ LANGUAGE plpgsql;
+
+-- DELETA O BOLETIM
+
+CREATE FUNCTION delBoletim(id int)
+RETURNS void AS $$
+    DECLARE vit varchar;
+    BEGIN
+        vit := (select vitima from boletim where idboletim = id); 
+        delete from suspeito where (delito) in (select iddelito from suspeitosDeUmDelito where boletim = id);
+        delete from delito where boletim = id;
+        delete from boletim where idboletim = id;
+        perform delCidadao(vit);
+    END;
+$$ LANGUAGE plpgsql;

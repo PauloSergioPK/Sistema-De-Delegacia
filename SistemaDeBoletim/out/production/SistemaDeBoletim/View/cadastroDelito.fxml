@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="657.0" prefWidth="1177.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.cadastroDelitoController">
+    <children>
+        <AnchorPane layoutX="249.0" layoutY="618.0" prefHeight="39.0" prefWidth="929.0" style="-fx-background-color: #8b0303; -fx-opacity: 0.8;" />
+        <AnchorPane prefHeight="658.0" prefWidth="250.0" style="-fx-background-color: #141414;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <effect>
+                <DropShadow blurType="GAUSSIAN" height="101.06" radius="38.17" spread="0.09" width="53.62" />
+            </effect>
+         <children>
+              <ImageView fitHeight="225.0" fitWidth="143.0" layoutX="54.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                      <Image url="@../Resources/f9378cddaa4d327b39cca8eaad984fe6.png" />
+                  </image>
+              </ImageView>
+            <Button fx:id="btAvancar" layoutX="42.0" layoutY="535.0" mnemonicParsing="false" onAction="#cadastrarNoBanco" prefHeight="52.0" prefWidth="168.0" style="-fx-background-color: #8b0303; -fx-background-radius: 1000;" text="Finalizar" textFill="WHITE">
+               <font>
+                  <Font name="Calibri" size="25.0" />
+               </font>
+            </Button>
+         </children>
+        </AnchorPane>
+      <TextField fx:id="textEspecie" layoutX="283.0" layoutY="62.0" prefHeight="39.0" prefWidth="203.0" promptText="Digite a especie :" />
+      <TextField fx:id="textNatureza" layoutX="529.0" layoutY="62.0" prefHeight="39.0" prefWidth="203.0" promptText="Digite a natureza :" />
+      <CheckBox fx:id="cbFlagrante" layoutX="283.0" layoutY="450.0" mnemonicParsing="false" text="Flagrante" />
+      <TextField fx:id="textDataOcorrencia" layoutX="774.0" layoutY="62.0" prefHeight="39.0" prefWidth="203.0" promptText="Digite a data de ocorrencia :" />
+      <TextField fx:id="textTipoLocal" layoutX="283.0" layoutY="142.0" prefHeight="39.0" prefWidth="203.0" promptText="Digite o tipo de local :" />
+      <TextField fx:id="textCep" layoutX="536.0" layoutY="142.0" prefHeight="39.0" prefWidth="175.0" promptText="Digite o cep :" />
+      <TextField fx:id="textCidade" layoutX="763.0" layoutY="142.0" prefHeight="39.0" prefWidth="244.0" promptText="Digite a cidade :" />
+      <TextField fx:id="textEstado" layoutX="283.0" layoutY="221.0" prefHeight="39.0" prefWidth="143.0" promptText="Digite o estado :" />
+      <TextField fx:id="textPais" layoutX="477.0" layoutY="221.0" prefHeight="39.0" prefWidth="225.0" promptText="Digite o pais :" />
+      <TextField fx:id="textRua" layoutX="748.0" layoutY="221.0" prefHeight="39.0" prefWidth="284.0" promptText="Digite a rua :" />
+      <TextField fx:id="textNumero" layoutX="283.0" layoutY="301.0" prefHeight="39.0" prefWidth="110.0" promptText="Digite o numero :" />
+      <TextField fx:id="textNumeroResidencia" layoutX="440.0" layoutY="301.0" prefHeight="39.0" prefWidth="193.0" promptText="Digite o numero da Residencia :" />
+      <TextField fx:id="textComplemento" layoutX="283.0" layoutY="382.0" prefHeight="39.0" prefWidth="436.0" promptText="Digite o complemento :" />
+      <TextField fx:id="textBairro" layoutX="679.0" layoutY="301.0" prefHeight="39.0" prefWidth="168.0" promptText="Digite o bairro :" />
+      <Label fx:id="textDica" layoutX="260.0" layoutY="591.0" prefHeight="19.0" prefWidth="361.0" text="Obs : apenas digite informacoes concretas !!!" textFill="RED">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Button fx:id="btAvancar1" layoutX="977.0" layoutY="571.0" mnemonicParsing="false" onAction="#cadastrarSuspeito" prefHeight="30.0" prefWidth="168.0" style="-fx-background-color: #8b0303; -fx-background-radius: 1000;" text="Cadastrar Suspeito" textFill="WHITE">
+         <font>
+            <Font name="Calibri" size="16.0" />
+         </font>
+      </Button>
+      <Label fx:id="textoAvisoDelito" layoutX="283.0" layoutY="483.0" prefHeight="30.0" prefWidth="294.0" textFill="RED">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Button fx:id="btAvancar11" layoutX="763.0" layoutY="571.0" mnemonicParsing="false" onAction="#cadastrarDelito" prefHeight="30.0" prefWidth="168.0" style="-fx-background-color: #8b0303; -fx-background-radius: 1000;" text="Cadastrar Delito" textFill="WHITE">
+         <font>
+            <Font name="Calibri" size="16.0" />
+         </font>
+      </Button>
+    </children>
+</AnchorPane>
