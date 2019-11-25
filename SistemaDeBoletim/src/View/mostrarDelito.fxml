@@ -40,6 +40,9 @@
             <TableColumn fx:id="colunaIdBoletim" prefWidth="120.0" text="Numero do Boletim" />
             <TableColumn fx:id="colunaFlagrante" prefWidth="101.0" text="Flagrante" />
         </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
       </TableView>
       <Button layoutX="863.0" layoutY="569.0" mnemonicParsing="false" onAction="#listarSuspeito" style="-fx-background-color: #c94747; -fx-background-radius: 15;" text="Listar suspeito" textFill="WHITE">
          <font>

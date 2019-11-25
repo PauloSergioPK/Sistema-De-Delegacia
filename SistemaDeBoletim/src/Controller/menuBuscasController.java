@@ -36,7 +36,18 @@ public class menuBuscasController {
 
     @FXML
     void listarAllCidadao(ActionEvent event) {
-
+        try{
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("../View/mostrarCidadao.fxml"));
+            Parent fxmls = loader.load();
+            mostrarCidadaoController controller = loader.getController();
+            String query = "select * from Cidadao";
+            controller.start(query);
+            Main.changeScreen(new Scene(fxmls));
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @FXML

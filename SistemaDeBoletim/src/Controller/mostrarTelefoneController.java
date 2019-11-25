@@ -2,8 +2,7 @@ package Controller;
 
 import Dao.Conexao;
 import Exec.Main;
-import Model.Delito;
-import Model.Suspeito;
+import Model.Telefone;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,34 +16,28 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.util.ArrayList;
 
-public class mostrarSuspeitoController {
+public class mostrarTelefoneController {
 
     @FXML
-    private TableView<Suspeito> tabelaBoletins;
+    private TableView<Telefone> tabelaBoletins;
 
     @FXML
-    private TableColumn<Suspeito, String> colunaIdSuspeito;
+    private TableColumn<Telefone, String> colunaNumero;
 
     @FXML
-    private TableColumn<Suspeito, String> colunaCpfSuspeito;
+    private TableColumn<Telefone, String> colunaCpf;
 
     @FXML
-    private TableColumn<Suspeito, String> colunaDescricao;
-
-    @FXML
-    private TableColumn<Suspeito, String> colunaIdDelito;
-
-    @FXML
-    void listarDelitos(ActionEvent event) {
+    void listarCidadao(ActionEvent event) {
         try {
-            Suspeito suspeito = tabelaBoletins.getSelectionModel().getSelectedItem();
-            if (suspeito != null) {
+            Telefone telefone = tabelaBoletins.getSelectionModel().getSelectedItem();
+            if (telefone != null) {
                 try {
                     FXMLLoader loader = new FXMLLoader();
-                    loader.setLocation(getClass().getResource("../View/mostrarDelito.fxml"));
+                    loader.setLocation(getClass().getResource("../View/mostrarCidadao.fxml"));
                     Parent fxmls = loader.load();
-                    mostrarDelitosController controller = loader.getController();
-                    String query = "select * from Delito where idDelito = " + suspeito.getIdDelito() + "";
+                    mostrarCidadaoController controller = loader.getController();
+                    String query = "select * from Cidadao where cpf = '" + telefone.getCpf() + "'";
                     controller.start(query);
                     Main.changeScreen(new Scene(fxmls));
                 } catch (Exception e) {
@@ -55,11 +48,6 @@ public class mostrarSuspeitoController {
         catch (Exception e){
             e.printStackTrace();
         }
-    }
-
-    @FXML
-    void listarSuspeitos(ActionEvent event) {
-
     }
 
     @FXML
@@ -74,8 +62,8 @@ public class mostrarSuspeitoController {
         }
     }
 
-    private ArrayList<Suspeito> suspeitos = new ArrayList<>();
-    private ObservableList<Suspeito> observableListBoletins;
+    private ArrayList<Telefone> telefones = new ArrayList<>();
+    private ObservableList<Telefone> observableListBoletins;
 
     public void start(String query){
         try{
@@ -84,23 +72,17 @@ public class mostrarSuspeitoController {
             System.out.println(query);
             banco.rs = banco.stmt.executeQuery(query);
             while(banco.rs.next()){
-                Suspeito aux = new Suspeito();
-                aux.setIdSuspeito(banco.rs.getInt("idSuspeito"));
-                aux.setDescricao(banco.rs.getString("descricao"));
-                aux.setCpf(banco.rs.getString("investigado"));
-                aux.setIdDelito(banco.rs.getInt("delito"));
-                suspeitos.add(aux);
+                Telefone aux = new Telefone();
+                aux.setCpf(banco.rs.getString("cidadao"));
+                aux.setNumTelefone(banco.rs.getString("numTelefone"));
+                telefones.add(aux);
                 System.out.println(aux);
             }
             banco.Desconectar();
-            observableListBoletins = FXCollections.observableArrayList(suspeitos);
-            colunaCpfSuspeito.setCellValueFactory(new PropertyValueFactory<>("cpf"));
-            colunaDescricao.setCellValueFactory(new PropertyValueFactory<>("descricao"));
-            colunaIdDelito.setCellValueFactory(new PropertyValueFactory<>("idDelito"));
-            colunaIdSuspeito.setCellValueFactory(new PropertyValueFactory<>("idSuspeito"));
+            observableListBoletins = FXCollections.observableArrayList(telefones);
+            colunaCpf.setCellValueFactory(new PropertyValueFactory<>("cpf"));
+            colunaNumero.setCellValueFactory(new PropertyValueFactory<>("numTelefone"));
             tabelaBoletins.setItems(observableListBoletins);
-
-
         }
         catch (Exception e){
             e.printStackTrace();

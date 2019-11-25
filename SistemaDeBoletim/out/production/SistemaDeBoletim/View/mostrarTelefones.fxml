@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="657.0" prefWidth="1177.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.mostrarEnderecoController">
+<AnchorPane prefHeight="657.0" prefWidth="1177.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.mostrarTelefoneController">
    <children>
-      <AnchorPane layoutX="249.0" layoutY="618.0" prefHeight="39.0" prefWidth="929.0" style="-fx-background-color: #8b0303; -fx-opacity: 0.8;" />
+      <AnchorPane layoutX="249.0" layoutY="624.0" prefHeight="39.0" prefWidth="945.0" style="-fx-background-color: #8b0303; -fx-opacity: 0.8;" />
       <AnchorPane prefHeight="658.0" prefWidth="250.0" style="-fx-background-color: #141414;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <effect>
             <DropShadow blurType="GAUSSIAN" height="101.06" radius="38.17" spread="0.09" width="53.62" />
@@ -31,24 +31,14 @@
       </AnchorPane>
       <TableView fx:id="tabelaBoletins" layoutX="265.0" layoutY="14.0" prefHeight="542.0" prefWidth="896.0">
         <columns>
-          <TableColumn fx:id="colunaID" prefWidth="39.0" text="ID " />
-            <TableColumn fx:id="colunaCEP" prefWidth="73.0" text="CEP" />
-            <TableColumn fx:id="colunaCidade" prefWidth="102.0" text="Cidade" />
-          <TableColumn fx:id="colunaEstado" prefWidth="75.0" text="Estado" />
-            <TableColumn fx:id="colunaPais" prefWidth="85.0" text="Pais" />
-            <TableColumn fx:id="colunaRua" prefWidth="132.0" text="Rua" />
-            <TableColumn fx:id="colunaNumero" prefWidth="57.0" text="Numero" />
-            <TableColumn fx:id="colunaNumAp" prefWidth="74.0" text="NumAp" />
-            <TableColumn fx:id="colunaComplemento" prefWidth="151.0" text="Complemento" />
-            <TableColumn fx:id="colunaBairro" prefWidth="107.0" text="Bairro" />
+          <TableColumn fx:id="colunaNumero" prefWidth="130.0" text="Numero" />
+            <TableColumn fx:id="colunaCpf" prefWidth="133.0" text="CPF do Cidadao" />
         </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
       </TableView>
-      <Button layoutX="863.0" layoutY="569.0" mnemonicParsing="false" onAction="#listarSuspeitos" style="-fx-background-color: #c94747; -fx-background-radius: 15;" text="Listar cidadao" textFill="WHITE">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Button>
-      <Button layoutX="1049.0" layoutY="569.0" mnemonicParsing="false" onAction="#listarDelitos" style="-fx-background-color: #c94747; -fx-background-radius: 15;" text="Listar delitos" textFill="WHITE">
+      <Button layoutX="1041.0" layoutY="569.0" mnemonicParsing="false" onAction="#listarCidadao" style="-fx-background-color: #c94747; -fx-background-radius: 15;" text="Listar cidadao" textFill="WHITE">
          <font>
             <Font size="16.0" />
          </font>

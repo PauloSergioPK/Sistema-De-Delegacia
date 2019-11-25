@@ -78,7 +78,7 @@ public class mostrarBoletimController implements Initializable {
                     loader.setLocation(getClass().getResource("../View/mostrarSuspeitos.fxml"));
                     Parent fxmls = loader.load();
                     mostrarSuspeitoController controller = loader.getController();
-                    String query = "select * from Suspeito where delito = (select idDelito from Delito where boletim = "+boletim.getIdBoletim()+" )"+"";
+                    String query = "select * from Suspeito where delito in (select idDelito from Delito where boletim = "+boletim.getIdBoletim()+" )"+"";
                     controller.start(query);
                     Main.changeScreen(new Scene(fxmls));
                 }

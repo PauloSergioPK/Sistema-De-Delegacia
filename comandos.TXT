@@ -76,6 +76,7 @@ CREATE VIEW suspeitosDeUmDelito as (select D.iddelito,D.boletim from
 delito D inner join boletim B on (D.boletim = B.idboletim) 
 inner join Suspeito S on (S.delito = D.iddelito) group by D.iddelito);
 
+
 -- VERIFICA SE O CIDADAO ESTÁ VINCULADO A ALGUM BOLETIM (É VITIMA OU SUSPEITO)
 
 CREATE FUNCTION verCidadao(cpf varchar) 
@@ -107,14 +108,27 @@ $$ LANGUAGE plpgsql;
 
 -- DELETA O BOLETIM
 
-CREATE FUNCTION delBoletim(id int)
+
+
+CREATE OR REPLACE FUNCTION delBoletim(id int)
 RETURNS void AS $$
     DECLARE vit varchar;
     BEGIN
-        vit := (select vitima from boletim where idboletim = id); 
+        vit := (select vitima from boletim where idboletim = id);
+	DROP table if exists _tmp;
+        CREATE TEMPORARY TABLE _tmp AS select idEndereco from Endereco where idEndereco in (select localOcorrencia from Delito where boletim = id);
         delete from suspeito where (delito) in (select iddelito from suspeitosDeUmDelito where boletim = id);
-        delete from delito where boletim = id;
+	delete from delito where boletim = id;
+        delete from Endereco where idEndereco in (select idEndereco from _tmp);
         delete from boletim where idboletim = id;
         perform delCidadao(vit);
     END;
 $$ LANGUAGE plpgsql;
+
+
+drop table boletim cascade;
+drop table cidadao cascade;
+drop table endereco cascade;
+drop table telefone cascade;
+drop table suspeito cascade;
+drop table delito cascade;

@@ -31,7 +31,7 @@
       </AnchorPane>
       <TableView fx:id="tabelaBoletins" layoutX="265.0" layoutY="14.0" prefHeight="542.0" prefWidth="896.0">
         <columns>
-          <TableColumn fx:id="colunaIdSuspeito" prefWidth="130.0" text="Numero do Suspeito" />
+          <TableColumn fx:id="colunaIdSuspeito" prefWidth="130.0" text="ID do Suspeito" />
             <TableColumn fx:id="colunaCpfSuspeito" prefWidth="133.0" text="CPF do Suspeito" />
             <TableColumn fx:id="colunaDescricao" prefWidth="122.0" text="Descricao do Suspeito" />
           <TableColumn fx:id="colunaIdDelito" prefWidth="138.0" text="Numero do Delito" />

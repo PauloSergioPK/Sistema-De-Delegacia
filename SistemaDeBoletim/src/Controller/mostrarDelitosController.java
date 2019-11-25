@@ -48,12 +48,50 @@ public class mostrarDelitosController {
 
     @FXML
     void listarEndereco(ActionEvent event) {
-
+        try {
+            Delito delito = tabelaBoletins.getSelectionModel().getSelectedItem();
+            if(delito != null) {
+                try{
+                    FXMLLoader loader = new FXMLLoader();
+                    loader.setLocation(getClass().getResource("../View/mostrarEndereco.fxml"));
+                    Parent fxmls = loader.load();
+                    mostrarEnderecoController controller = loader.getController();
+                    String query = "select * from Endereco where idEndereco = "+delito.getLocalOcorrencia()+"";
+                    controller.start(query);
+                    Main.changeScreen(new Scene(fxmls));
+                }
+                catch(Exception e){
+                    e.printStackTrace();
+                }
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @FXML
     void listarSuspeito(ActionEvent event) {
-
+        try {
+            Delito delito = tabelaBoletins.getSelectionModel().getSelectedItem();
+            if(delito != null) {
+                try{
+                    FXMLLoader loader = new FXMLLoader();
+                    loader.setLocation(getClass().getResource("../View/mostrarSuspeitos.fxml"));
+                    Parent fxmls = loader.load();
+                    mostrarSuspeitoController controller = loader.getController();
+                    String query = "select * from Suspeito where delito in (select idDelito from Delito where boletim = "+delito.getIdBoletim()+" )"+"";
+                    controller.start(query);
+                    Main.changeScreen(new Scene(fxmls));
+                }
+                catch(Exception e){
+                    e.printStackTrace();
+                }
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @FXML
