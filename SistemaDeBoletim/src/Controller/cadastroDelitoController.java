@@ -197,7 +197,7 @@ public class cadastroDelitoController {
                 loader.setLocation(getClass().getResource("../View/principalScreen.fxml"));
                 Parent fxmls = loader.load();
                 principalScreenController controller = loader.getController();
-                controller.update(Main.totalBoletins);
+                controller.update(Main.totalBoletins,Main.totalSuspeitos);
                 Main.changeScreen(new Scene(fxmls));
             }
         }

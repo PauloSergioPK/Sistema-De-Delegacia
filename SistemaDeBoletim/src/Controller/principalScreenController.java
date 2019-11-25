@@ -45,7 +45,14 @@ public class principalScreenController implements Initializable {
 
     @FXML
     void realizarConsulta(ActionEvent event) {
-
+        try{
+            Parent fxmlbuscas = FXMLLoader.load(getClass().getResource("../View/menuBuscas.fxml"));
+            Scene busca = new Scene(fxmlbuscas);
+            Main.changeScreen(busca);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -144,7 +151,8 @@ public class principalScreenController implements Initializable {
         //this.totalSuspeitos.setText(ts);
     }
 
-    public void update(int valor){
+    public void update(int valor,int valor2){
         this.totalBoletins.setText(Integer.toString(valor));
+        this.totalSuspeitos.setText(Integer.toString(valor2));
     }
 }

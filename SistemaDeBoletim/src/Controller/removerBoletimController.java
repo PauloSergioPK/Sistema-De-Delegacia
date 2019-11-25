@@ -108,8 +108,4 @@ public class removerBoletimController implements Initializable {
         }
 
     }
-
-    private void carregarTabela(){
-
-    }
 }
