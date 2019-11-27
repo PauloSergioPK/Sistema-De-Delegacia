@@ -28,6 +28,7 @@ public class pegarCidadaoController {
     @FXML
     void confirmarCidadao(ActionEvent event) {
         Cidadao aux = new Cidadao();
+        aux.setCpf("valor");
         try{
             Conexao banco = new Conexao();
             banco.Conectar("jdbc:postgresql://localhost:5432/Delegacia", "postgres", "123");
@@ -47,8 +48,9 @@ public class pegarCidadaoController {
                     aux.setIdade(banco.rs.getString("idade"));
                     aux.setEndereco(banco.rs.getInt("endereco"));
                 }
-                if(aux.getCpf() != null){
+                if(aux.getCpf() != null && !aux.getCpf().equals("valor")){
                     Endereco ad = new Endereco();
+                    ad.setCidade("");
                     banco.rs = banco.stmt.executeQuery("select * from Endereco where idEndereco = "+aux.getEndereco()+"");
                     while(banco.rs.next()){
                         ad.setIdEndereco(banco.rs.getInt("idEndereco"));
@@ -62,7 +64,7 @@ public class pegarCidadaoController {
                         ad.setComplemento(banco.rs.getString("complemento"));
                         ad.setRua(banco.rs.getString("rua"));
                     }
-                    if(!ad.getCidade().equals("")){
+                    if(ad.getCidade() != null && !ad.getCidade().equals("")){
                         ArrayList<Telefone> telefones = new ArrayList<>();
                         banco.rs = banco.stmt.executeQuery("select * from Telefone where cidadao = '"+aux.getCpf()+"'");
                         while(banco.rs.next()){

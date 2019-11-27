@@ -7,6 +7,7 @@ public class Investigado {
     private Endereco endereco;
     private ArrayList<Telefone> telefones;
     private Suspeito suspeito;
+    private boolean cadastro = true;
 
     public Investigado(){
 
@@ -59,5 +60,13 @@ public class Investigado {
                 ", telefones=" + telefones +
                 ", suspeito=" + suspeito +
                 '}';
+    }
+
+    public boolean isCadastro() {
+        return cadastro;
+    }
+
+    public void setCadastro(boolean cadastro) {
+        this.cadastro = cadastro;
     }
 }

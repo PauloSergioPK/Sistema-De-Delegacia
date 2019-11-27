@@ -92,7 +92,7 @@ public class Conexao {
 
             for (Investigado i : investigados) {
                 String cadastro = i.getSuspeito().getCpf();
-                if(!cadastro.equals("desconhecido")){ //irei cadastrar como cidadao
+                if(!cadastro.equals("desconhecido") && i.isCadastro()){ //irei cadastrar como cidadao
                     String numero = i.getEndereco().getNumero();
                     String numeroResidencia = i.getEndereco().getNumeroResidencia();
                     if(numero.equals("desconhecido"))
@@ -115,10 +115,14 @@ public class Conexao {
                         this.stmt.executeUpdate(cadastrarTelefone);
                     }
                 }
-                else{
+                else if (cadastro.equals("desconhecido")){
                     cadastro = "null";
                 }
-                String cadastrarSuspeito = "insert into Suspeito values ("+i.getSuspeito().getIdSuspeito()+","+cadastro+",'"+i.getSuspeito().getDescricao()+"',"+i.getSuspeito().getIdDelito()+")";
+                String cadastrarSuspeito;
+                if(cadastro.equals("null"))
+                    cadastrarSuspeito = "insert into Suspeito values ("+i.getSuspeito().getIdSuspeito()+","+cadastro+",'"+i.getSuspeito().getDescricao()+"',"+i.getSuspeito().getIdDelito()+")";
+                else
+                    cadastrarSuspeito = "insert into Suspeito values ("+i.getSuspeito().getIdSuspeito()+",'"+cadastro+"','"+i.getSuspeito().getDescricao()+"',"+i.getSuspeito().getIdDelito()+")";
                 //System.out.println(cadastrarSuspeito);
                 this.stmt.executeUpdate(cadastrarSuspeito);
             }

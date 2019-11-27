@@ -208,7 +208,7 @@ public class menuBuscasController {
             loader.setLocation(getClass().getResource("../View/mostrarCidadao.fxml"));
             Parent fxmls = loader.load();
             mostrarCidadaoController controller = loader.getController();
-            String query = "select * from Cidadao where cpf = (select vitima from Boletim)";
+            String query = "select * from Cidadao where cpf in (select vitima from Boletim)";
             controller.start(query);
             Main.changeScreen(new Scene(fxmls));
         }

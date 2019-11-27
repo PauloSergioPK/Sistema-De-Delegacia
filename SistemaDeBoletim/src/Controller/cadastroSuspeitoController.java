@@ -1,5 +1,6 @@
 package Controller;
 
+import Dao.Conexao;
 import Exec.Main;
 import Model.*;
 import javafx.event.ActionEvent;
@@ -227,13 +228,71 @@ public class cadastroSuspeitoController {
                     textNumeroResidencia.getText(),textComplemento.getText(),textBairro.getText()));
             investigado.setCidadao(new Cidadao(textCpf.getText(),textRg.getText(),textDataNascimento.getText(),textNacionalidade.getText(),textSexo.getText(),textEstadoCivil.getText(),textNome.getText(),
                     textProfissao.getText(),textMae.getText(),textPai.getText(),textIdade.getText(),investigado.getEndereco().getIdEndereco()));
-            if(!investigado.getCidadao().getCpf().equals("desconhecido"))
+            if(!investigado.getCidadao().getCpf().equals("desconhecido")) { //updates dia 27/11 talvez cause erros
+                Cidadao aux= new Cidadao();
+                aux.setCpf("valor");
+                try{
+                    Conexao banco = new Conexao();
+                    banco.Conectar("jdbc:postgresql://localhost:5432/Delegacia", "postgres", "123");
+                    banco.rs = banco.stmt.executeQuery("select * from Cidadao where cpf = '"+investigado.getCidadao().getCpf()+ "'");
+                    while(banco.rs.next()) {
+                        aux.setCpf(banco.rs.getString("cpf"));
+                        aux.setDataNascimento(banco.rs.getString("dataNascimento"));
+                        aux.setRg(banco.rs.getString("rg"));
+                        aux.setNacionalidade(banco.rs.getString("nacionalidade"));
+                        aux.setSexo(banco.rs.getString("sexo"));
+                        aux.setEstadoCivil(banco.rs.getString("estadoCivil"));
+                        aux.setNome(banco.rs.getString("nome"));
+                        aux.setProfissao(banco.rs.getString("profissao"));
+                        aux.setNomeDaMae(banco.rs.getString("nomeDaMae"));
+                        aux.setNomeDoPai(banco.rs.getString("nomeDoPai"));
+                        aux.setIdade(banco.rs.getString("idade"));
+                        aux.setEndereco(banco.rs.getInt("endereco"));
+                    }
+                    if(aux.getCpf() != null && !aux.getCpf().equals("valor")) {
+                        investigado.setCidadao(aux);
+                        Endereco ad = new Endereco();
+                        ad.setCidade("");
+                        banco.rs = banco.stmt.executeQuery("select * from Endereco where idEndereco = "+aux.getEndereco()+"");
+                        while(banco.rs.next()){
+                            ad.setIdEndereco(banco.rs.getInt("idEndereco"));
+                            ad.setCep(banco.rs.getString("cep"));
+                            ad.setCidade(banco.rs.getString("cidade"));
+                            ad.setEstado(banco.rs.getString("estado"));
+                            ad.setPais(banco.rs.getString("pais"));
+                            ad.setNumero(banco.rs.getString("numero"));
+                            ad.setNumeroResidencia(banco.rs.getString("numeroResidencia"));
+                            ad.setBairro(banco.rs.getString("bairro"));
+                            ad.setComplemento(banco.rs.getString("complemento"));
+                            ad.setRua(banco.rs.getString("rua"));
+                        }
+                        if(ad.getCidade() != null && !ad.getCidade().equals("")){
+                            ArrayList<Telefone> telefones = new ArrayList<>();
+                            banco.rs = banco.stmt.executeQuery("select * from Telefone where cidadao = '"+aux.getCpf()+"'");
+                            while(banco.rs.next()){
+                                Telefone te = new Telefone();
+                                te.setCpf(banco.rs.getString("cidadao"));
+                                te.setNumTelefone(banco.rs.getString("numTelefone"));
+                                telefones.add(te);
+                            }
+                            investigado.setEndereco(ad);
+                            investigado.setTelefones(telefones);
+                            investigado.setCadastro(false);
+                            investigado.getSuspeito().setCpf(aux.getCpf());
+                        }
+                    }
+                    banco.Desconectar();
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
+                Main.totalCidadao++;
                 Main.totalEndereco++;
-            Main.totalCidadao++;
+            }
             investigado.getSuspeito().setCpf(investigado.getCidadao().getCpf());
             investigado.getSuspeito().setDescricao(textDescricao.getText());
             try {
-                if(!investigado.getCidadao().getCpf().equals("desconhecido")) { // talvez esta alteracao cause um erro
+                if(!investigado.getCidadao().getCpf().equals("desconhecido") && investigado.isCadastro()) { // talvez esta alteracao cause um erro
                     investigado.setTelefones(avisoTelefoneController.display());
                     if (investigado.getTelefones() != null) {
                         for (Telefone t : investigado.getTelefones()) {
