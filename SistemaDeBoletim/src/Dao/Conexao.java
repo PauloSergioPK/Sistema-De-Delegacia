@@ -44,22 +44,26 @@ public class Conexao {
         }
     }
 
-    public void inserir(Cidadao cidadao, Endereco enderecoCidadao, ArrayList<Telefone> telefones, ArrayList<Endereco> enderecosDeCrimes, ArrayList<Investigado> investigados, ArrayList <Delito> delitos, Boletim b){
+    public void inserir(Cidadao cidadao, Endereco enderecoCidadao, ArrayList<Telefone> telefones, ArrayList<Endereco> enderecosDeCrimes, ArrayList<Investigado> investigados, ArrayList <Delito> delitos, Boletim b,int opcaoCidadao){
         try {
-            String cadastrarEndereco = "insert into Endereco" +
-                    " values ("+enderecoCidadao.getIdEndereco()+",'"+ enderecoCidadao.getCep()+"','"+enderecoCidadao.getCidade()+"','"+enderecoCidadao.getEstado()+"','"+enderecoCidadao.getPais()+"','"+
-                    enderecoCidadao.getRua()+"',"+enderecoCidadao.getNumero()+","+enderecoCidadao.getNumeroResidencia()+",'"+enderecoCidadao.getComplemento()+"','"+enderecoCidadao.getBairro()+"')";
-            this.stmt.executeUpdate(cadastrarEndereco);
-            //System.out.println(cadastrarEndereco);
-            String cadastrarCidadao = "insert into Cidadao(cpf,rg,dataNascimento,nacionalidade,sexo,estadoCivil,nome,profissao,nomeDaMae,nomeDoPai,idade,endereco)" +
-                    " values ('"+cidadao.getCpf()+"','"+cidadao.getRg()+"','"+cidadao.getDataNascimento()+"','"+cidadao.getNacionalidade()+"','"+cidadao.getSexo()+"','"+cidadao.getEstadoCivil()+"','"+
-                    cidadao.getNome()+"','"+cidadao.getProfissao()+"','"+cidadao.getNomeDaMae()+"','"+cidadao.getNomeDoPai()+"',"+cidadao.getIdade()+","+enderecoCidadao.getIdEndereco()+")";
-            //System.out.println(cidadao);
-            this.stmt.executeUpdate(cadastrarCidadao);
-            for (Telefone t : telefones) {
-                String cadastrarTelefone = "insert into Telefone(numTelefone,cidadao) values ('"+t.getNumTelefone()+"','"+t.getCpf()+"')";
-                //System.out.println(t);
-                this.stmt.executeUpdate(cadastrarTelefone);
+            String cadastrarEndereco;
+            String cadastrarCidadao;
+            if(opcaoCidadao == 1) {
+                cadastrarEndereco = "insert into Endereco" +
+                        " values (" + enderecoCidadao.getIdEndereco() + ",'" + enderecoCidadao.getCep() + "','" + enderecoCidadao.getCidade() + "','" + enderecoCidadao.getEstado() + "','" + enderecoCidadao.getPais() + "','" +
+                        enderecoCidadao.getRua() + "'," + enderecoCidadao.getNumero() + "," + enderecoCidadao.getNumeroResidencia() + ",'" + enderecoCidadao.getComplemento() + "','" + enderecoCidadao.getBairro() + "')";
+                this.stmt.executeUpdate(cadastrarEndereco);
+                //System.out.println(cadastrarEndereco);
+                cadastrarCidadao = "insert into Cidadao(cpf,rg,dataNascimento,nacionalidade,sexo,estadoCivil,nome,profissao,nomeDaMae,nomeDoPai,idade,endereco)" +
+                        " values ('" + cidadao.getCpf() + "','" + cidadao.getRg() + "','" + cidadao.getDataNascimento() + "','" + cidadao.getNacionalidade() + "','" + cidadao.getSexo() + "','" + cidadao.getEstadoCivil() + "','" +
+                        cidadao.getNome() + "','" + cidadao.getProfissao() + "','" + cidadao.getNomeDaMae() + "','" + cidadao.getNomeDoPai() + "'," + cidadao.getIdade() + "," + enderecoCidadao.getIdEndereco() + ")";
+                //System.out.println(cidadao);
+                this.stmt.executeUpdate(cadastrarCidadao);
+                for (Telefone t : telefones) {
+                    String cadastrarTelefone = "insert into Telefone(numTelefone,cidadao) values ('" + t.getNumTelefone() + "','" + t.getCpf() + "')";
+                    //System.out.println(t);
+                    this.stmt.executeUpdate(cadastrarTelefone);
+                }
             }
             String cadastrarBoletim = "insert into Boletim values ("+b.getIdBoletim()+",'"+b.getDataComunicacao()+"','"+b.getDataElaboracao()+"','"+ b.getRelato()+"','"+ b.getIdVitima()+"')";
             //System.out.println(b);

@@ -69,7 +69,9 @@ public class avisoTelefoneController {
 
              */
             stage.setOpacity(0);
-            telefones.add(adicionarTelefoneController.display());
+            Telefone aux = adicionarTelefoneController.display();
+            if(aux != null)
+                telefones.add(aux);
             this.textAviso.setText("Deseja adicionar outro telefone ?");
             stage.setOpacity(1);
 

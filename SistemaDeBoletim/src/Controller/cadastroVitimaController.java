@@ -1,5 +1,6 @@
 package Controller;
 
+import Dao.Conexao;
 import Exec.Main;
 import Model.*;
 import javafx.event.ActionEvent;
@@ -243,6 +244,20 @@ public class cadastroVitimaController{
     @FXML
     void cadastrarCivil(ActionEvent event) {
         try {
+            if(cpfValido()){
+                String aux = "";
+                Conexao banco = new Conexao();
+                banco.Conectar("jdbc:postgresql://localhost:5432/Delegacia", "postgres", "123");
+                banco.rs = banco.stmt.executeQuery("select cpf from Cidadao where cpf = '"+textCpf.getText()+"'");
+                while(banco.rs.next()){
+                    aux = banco.rs.getString("cpf");
+                }
+                banco.Desconectar();
+                if(aux.equals(textCpf.getText())){
+                    this.textStatus.setText("Vitima ja cadastrada!!!");
+                    return;
+                }
+            }
             if (complementoValido() && nomeValido() && sexoValido() && ruaValido() && profissaoValido() && paisValido() && residenciaValido() &&
                     numeroValido() && nacionalidadeValido() && paiValido() && maeValido() && idadeValido() && bairroValido() && cepValido() && cidadeValido() &&
                     dataNascimentoValido() && estadoValido() && estadoCivilValido() && rgValido() && cpfValido()) {
@@ -274,7 +289,7 @@ public class cadastroVitimaController{
                         t.setCpf(cidadao.getCpf());
                     }
                 }
-                controller.start(cidadao,telefones,endereco);
+                controller.start(cidadao,telefones,endereco,1);
                 System.out.println(endereco.getComplemento());
                 Main.changeScreen(new Scene(fxmlBoletim));
                 //Node node = (Node) event.getSource();

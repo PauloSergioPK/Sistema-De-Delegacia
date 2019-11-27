@@ -11,7 +11,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
@@ -34,9 +36,13 @@ public class principalScreenController implements Initializable {
     @FXML
     void cadastrarOcorrencia(ActionEvent event) throws IOException {
         try{
-            Parent fxmlcadastrarVitima = FXMLLoader.load(getClass().getResource("../View/cadastroVitima.fxml"));
+            Parent fxmlcadastrarVitima = FXMLLoader.load(getClass().getResource("../View/avisoCidadao.fxml"));
             Scene cadastro = new Scene(fxmlcadastrarVitima);
-            Main.changeScreen(cadastro);
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setScene(cadastro);
+            stage.showAndWait();
         }
         catch(Exception e){
             e.printStackTrace();

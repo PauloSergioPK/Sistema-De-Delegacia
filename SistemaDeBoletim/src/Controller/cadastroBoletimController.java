@@ -22,6 +22,10 @@ public class cadastroBoletimController {
     private ArrayList<Telefone> telefones;
     private Endereco enderecoCidadao;
 
+    //1 para cadastrarNoBanco o cidadao
+    //2 ele ja esta cadastrado
+
+
     @FXML
     private Button btAvancar;
 
@@ -36,6 +40,8 @@ public class cadastroBoletimController {
 
     @FXML
     private Label textStatus;
+
+    private int opcao;
 
     private boolean comunicacaoValida(){
         if(!textComunicao.getText().equals(""))
@@ -66,7 +72,7 @@ public class cadastroBoletimController {
                 loader.setLocation(getClass().getResource("../View/cadastroDelito.fxml"));
                 Parent fxmlDelito = loader.load();
                 cadastroDelitoController controller = loader.getController();
-                controller.start(cidadao,telefones,enderecoCidadao,boletim);
+                controller.start(cidadao,telefones,enderecoCidadao,boletim,opcao);
                 Main.changeScreen(new Scene(fxmlDelito));
             }
             catch(Exception e){
@@ -103,9 +109,10 @@ public class cadastroBoletimController {
         this.enderecoCidadao = enderecoCidadao;
     }
 
-    public void start(Cidadao cidadao,ArrayList<Telefone> telefones, Endereco enderecoCidadao){
+    public void start(Cidadao cidadao,ArrayList<Telefone> telefones, Endereco enderecoCidadao,int opcao){
         this.cidadao = cidadao;
         this.telefones = telefones;
         this.enderecoCidadao = enderecoCidadao;
+        this.opcao = opcao;
     }
 }

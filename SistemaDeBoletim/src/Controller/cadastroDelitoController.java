@@ -72,6 +72,8 @@ public class cadastroDelitoController {
     @FXML
     private Label textDica;
 
+    int opcaoCidadao; // 1 para cadastrar, 2 para nao cadastrar
+
     private void bairroValido(){
         if(textBairro.getText().equals(""))
             textBairro.setText("desconhecido");
@@ -191,7 +193,7 @@ public class cadastroDelitoController {
             else{
                 Conexao banco = new Conexao();
                 banco.Conectar("jdbc:postgresql://localhost:5432/Delegacia", "postgres", "123");
-                banco.inserir(cidadao,enderecoCidadao,telefones,enderecosDeCrimes,investigados,delitos,boletim);
+                banco.inserir(cidadao,enderecoCidadao,telefones,enderecosDeCrimes,investigados,delitos,boletim,opcaoCidadao);
                 banco.Desconectar();
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(getClass().getResource("../View/principalScreen.fxml"));
@@ -256,11 +258,12 @@ public class cadastroDelitoController {
         }
     }
 
-    public void start(Cidadao cidadao,ArrayList<Telefone> telefones, Endereco enderecoCidadao, Boletim boletim){
+    public void start(Cidadao cidadao,ArrayList<Telefone> telefones, Endereco enderecoCidadao, Boletim boletim,int opcaoCidadao){
         this.cidadao = cidadao;
         this.telefones = telefones;
         this.enderecoCidadao = enderecoCidadao;
         this.boletim = boletim;
+        this.opcaoCidadao = opcaoCidadao;
     }
 
 }
