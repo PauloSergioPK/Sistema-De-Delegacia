@@ -59,7 +59,25 @@ public class mostrarSuspeitoController {
 
     @FXML
     void listarSuspeitos(ActionEvent event) {
-
+        try {
+            Suspeito suspeito = tabelaBoletins.getSelectionModel().getSelectedItem();
+            if (suspeito != null) {
+                try {
+                    FXMLLoader loader = new FXMLLoader();
+                    loader.setLocation(getClass().getResource("../View/mostrarCidadao.fxml"));
+                    Parent fxmls = loader.load();
+                    mostrarCidadaoController controller = loader.getController();
+                    String query = "select * from Cidadao where cpf = '" + suspeito.getCpf() + "'";
+                    controller.start(query);
+                    Main.changeScreen(new Scene(fxmls));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @FXML

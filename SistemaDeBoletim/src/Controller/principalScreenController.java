@@ -134,7 +134,7 @@ public class principalScreenController implements Initializable {
                     Main.totalDelitos = Integer.valueOf(banco.rs.getString("max"));
                 }
                 catch(Exception e){
-                    Main.totalBoletins = 0;
+                    Main.totalDelitos = 0;
                 }
             }
             banco.Desconectar();
@@ -154,5 +154,10 @@ public class principalScreenController implements Initializable {
     public void update(int valor,int valor2){
         this.totalBoletins.setText(Integer.toString(valor));
         this.totalSuspeitos.setText(Integer.toString(valor2));
+    }
+
+    @FXML
+    void showDevelopers(MouseEvent event) {
+
     }
 }

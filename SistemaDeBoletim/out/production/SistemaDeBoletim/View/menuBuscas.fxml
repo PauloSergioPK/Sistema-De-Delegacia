@@ -21,10 +21,12 @@
             <Button layoutX="342.0" layoutY="29.0" mnemonicParsing="false" onAction="#listarAllBoletim" prefHeight="39.0" prefWidth="217.0" text="Listar todos os boletins" />
             <Button layoutX="342.0" layoutY="108.0" mnemonicParsing="false" onAction="#listarAllSuspeitosFromBoletim" prefHeight="39.0" prefWidth="217.0" text="Listar suspeitos de um boletim" />
             <Button layoutX="342.0" layoutY="189.0" mnemonicParsing="false" onAction="#listarAllDelito" prefHeight="39.0" prefWidth="217.0" text="Listar todos os delitos" />
-            <Button layoutX="342.0" layoutY="271.0" mnemonicParsing="false" onAction="#listarAllDelitosFromEndereco" prefHeight="39.0" prefWidth="217.0" text="Listar crimes de um endereco" />
+            <Button layoutX="342.0" layoutY="271.0" mnemonicParsing="false" onAction="#listarAllDelitosFromCidade" prefHeight="39.0" prefWidth="217.0" text="Listar crimes de uma cidade" />
             <Button layoutX="342.0" layoutY="356.0" mnemonicParsing="false" onAction="#listarTelefonesFromCidadao" prefHeight="39.0" prefWidth="217.0" text="Listar telefones de um cidadao" />
             <Button layoutX="649.0" layoutY="29.0" mnemonicParsing="false" onAction="#ListarCrimesFromSuspeito" prefHeight="39.0" prefWidth="217.0" text="Listar crimes de um suspeito" />
             <Button layoutX="649.0" layoutY="108.0" mnemonicParsing="false" onAction="#listarCidadaoFromTelefone" prefHeight="39.0" prefWidth="217.0" text="Listar cidadao de um telefone" />
+            <Button layoutX="649.0" layoutY="180.0" mnemonicParsing="false" onAction="#listarAllDelitosFromRua" prefHeight="39.0" prefWidth="217.0" text="Listar crimes de uma rua" />
+            <Button layoutX="649.0" layoutY="271.0" mnemonicParsing="false" onAction="#listarAllDelitosFromPais" prefHeight="39.0" prefWidth="217.0" text="Listar crimes de um pais" />
          </children></Pane>
       <AnchorPane prefHeight="658.0" prefWidth="250.0" style="-fx-background-color: #141414;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <effect>

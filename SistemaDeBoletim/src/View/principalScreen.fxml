@@ -65,7 +65,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <ImageView fitHeight="331.0" fitWidth="334.0" layoutX="552.0" layoutY="126.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="331.0" fitWidth="334.0" layoutX="552.0" layoutY="126.0" onMouseClicked="#showDevelopers" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Resources/f9378cddaa4d327b39cca8eaad984fe6.png" />
          </image>
