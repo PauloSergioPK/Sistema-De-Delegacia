@@ -62,10 +62,18 @@ public class removerDelitoController {
                     while(banco.rs.next()){
                         investigados.add(banco.rs.getString("investigado"));
                     }
+                    ArrayList<String> enderecos = new ArrayList<>();
+                    banco.rs = banco.stmt.executeQuery("select idEndereco from Endereco where idEndereco in (select localOcorrencia from Delito where idDelito = "+delito.getIdDelito()+")");
+                    while(banco.rs.next()){
+                        enderecos.add(banco.rs.getString("idEndereco"));
+                    }
                     banco.stmt.execute("delete from Suspeito where delito = "+delito.getIdDelito()+"");
                     banco.stmt.execute("delete from Delito where idDelito = "+delito.getIdDelito()+"");
                     for(String s : investigados){
                         banco.stmt.execute("select * from delCidadao ('"+s+"')");
+                    }
+                    for(String i : enderecos){
+                        banco.stmt.execute("delete from Endereco where idEndereco =  "+i+"");
                     }
                     banco.Desconectar();
 

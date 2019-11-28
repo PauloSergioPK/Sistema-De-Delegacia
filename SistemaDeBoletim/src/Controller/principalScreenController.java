@@ -171,6 +171,18 @@ public class principalScreenController implements Initializable {
 
     @FXML
     void showDevelopers(MouseEvent event) {
-
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("../View/developers.fxml"));
+            Parent scene = loader.load();
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setScene(new Scene(scene));
+            stage.showAndWait();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }
