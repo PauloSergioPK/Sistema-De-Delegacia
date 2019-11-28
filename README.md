@@ -17,15 +17,15 @@ do metodo "Conectar" para o seu banco.
 
 ![alt text](https://i.imgur.com/lywbtlP.jpg)
 
-- Va em File
+- Va em File e em estrutura do projeto
 
 ![alt text](https://i.imgur.com/ILV4isP.jpg)
 
-- Va em Estrutura do projeto
+- Va em Libraries e adicione o driver encontrado na pasta "driver"
 
 ![alt text](https://i.imgur.com/5nAxLEl.jpg)
 
-- Va em Libraries e adicione o driver encontrado na pasta "driver"
+
 
 ## Desenvolvedores :
 - Paulo Sergio Rabelo Costa
