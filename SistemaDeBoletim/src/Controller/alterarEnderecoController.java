@@ -54,11 +54,22 @@ public class alterarEnderecoController {
 
     @FXML
     void updateEndereco(ActionEvent event) { //ajeitar
-
+        try{
+            Endereco endereco = tabelaBoletins.getSelectionModel().getSelectedItem();
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("../View/updateEndereco.fxml"));
+            Parent scene = loader.load();
+            updateEnderecoController controller = loader.getController();
+            controller.start(boletim,cidadao,endereco);
+            Main.changeScreen(new Scene(scene));
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @FXML
-    void voltarBuscas(ActionEvent event) {
+    void voltarUpdate(ActionEvent event) {
         try{
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("../View/alterarCidadao.fxml"));
@@ -75,12 +86,14 @@ public class alterarEnderecoController {
     private ArrayList<Endereco> enderecos = new ArrayList<>();
     private ObservableList<Endereco> observableListBoletins;
     private Boletim boletim;
+    private Cidadao cidadao;
 
     public void start(Boletim boletim, Cidadao cidadao){
         try{
             Conexao banco = new Conexao();
             banco.Conectar("jdbc:postgresql://localhost:5432/Delegacia", "postgres", "123");
             this.boletim = boletim;
+            this.cidadao = cidadao;
             banco.rs = banco.stmt.executeQuery("select * from Endereco where idEndereco ="+cidadao.getEndereco()+"");
             while(banco.rs.next()){
                 Endereco aux = new Endereco();

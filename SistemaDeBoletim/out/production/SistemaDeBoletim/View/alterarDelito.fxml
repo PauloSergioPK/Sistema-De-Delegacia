@@ -44,15 +44,5 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Button layoutX="855.0" layoutY="569.0" mnemonicParsing="false" onAction="#alterarSuspeito" style="-fx-background-color: #c94747; -fx-background-radius: 15;" text="Alterar suspeito" textFill="WHITE">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Button>
-      <Button layoutX="1020.0" layoutY="569.0" mnemonicParsing="false" onAction="#alterarEndereco" style="-fx-background-color: #c94747; -fx-background-radius: 15;" text="Alterar endereco" textFill="WHITE">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Button>
    </children>
 </AnchorPane>

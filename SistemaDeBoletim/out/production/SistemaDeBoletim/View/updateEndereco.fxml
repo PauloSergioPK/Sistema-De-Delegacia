@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="657.0" prefWidth="1177.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.updateEnderecoController">
+    <children>
+        <AnchorPane layoutX="249.0" layoutY="618.0" prefHeight="39.0" prefWidth="929.0" style="-fx-background-color: #8b0303; -fx-opacity: 0.8;" />
+        <AnchorPane prefHeight="658.0" prefWidth="250.0" style="-fx-background-color: #141414;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <effect>
+                <DropShadow blurType="GAUSSIAN" height="101.06" radius="38.17" spread="0.09" width="53.62" />
+            </effect>
+         <children>
+              <ImageView fitHeight="225.0" fitWidth="143.0" layoutX="54.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                      <Image url="@../Resources/f9378cddaa4d327b39cca8eaad984fe6.png" />
+                  </image>
+              </ImageView>
+            <Button layoutX="42.0" layoutY="535.0" mnemonicParsing="false" onAction="#voltarUpdate" prefHeight="52.0" prefWidth="168.0" style="-fx-background-color: #8b0303; -fx-background-radius: 1000;" text="Confirmar" textFill="WHITE">
+               <font>
+                  <Font name="Calibri" size="25.0" />
+               </font>
+            </Button>
+         </children>
+        </AnchorPane>
+      <TextField fx:id="textCep" layoutX="269.0" layoutY="25.0" prefHeight="39.0" prefWidth="175.0" promptText="Digite o cep :" />
+      <TextField fx:id="textCidade" layoutX="473.0" layoutY="25.0" prefHeight="39.0" prefWidth="244.0" promptText="Digite a cidade :" />
+      <TextField fx:id="textEstado" layoutX="749.0" layoutY="25.0" prefHeight="39.0" prefWidth="143.0" promptText="Digite o estado :" />
+      <TextField fx:id="textPais" layoutX="924.0" layoutY="25.0" prefHeight="39.0" prefWidth="225.0" promptText="Digite o pais :" />
+      <TextField fx:id="textRua" layoutX="269.0" layoutY="98.0" prefHeight="39.0" prefWidth="284.0" promptText="Digite a rua :" />
+      <TextField fx:id="textNumero" layoutX="591.0" layoutY="98.0" prefHeight="39.0" prefWidth="110.0" promptText="Digite o numero :" />
+      <TextField fx:id="textNumeroResidencia" layoutX="738.0" layoutY="98.0" prefHeight="39.0" prefWidth="193.0" promptText="Digite o numero da Residencia :" />
+      <TextField fx:id="textComplemento" layoutX="269.0" layoutY="175.0" prefHeight="39.0" prefWidth="436.0" promptText="Digite o complemento :" />
+      <TextField fx:id="textBairro" layoutX="967.0" layoutY="98.0" prefHeight="39.0" prefWidth="168.0" promptText="Digite o bairro :" />
+      <Label fx:id="textStatus" layoutX="269.0" layoutY="539.0" prefHeight="39.0" prefWidth="313.0" textFill="RED">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+    </children>
+</AnchorPane>

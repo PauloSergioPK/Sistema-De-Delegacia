@@ -31,7 +31,7 @@
       <TextArea fx:id="relato" layoutX="535.0" layoutY="36.0" prefHeight="567.0" prefWidth="619.0" />
       <Button layoutX="280.0" layoutY="37.0" mnemonicParsing="false" onAction="#adiconarDelito" prefHeight="39.0" prefWidth="203.0" text="Adicionar Delito" />
       <Button layoutX="280.0" layoutY="108.0" mnemonicParsing="false" onAction="#removerDelito" prefHeight="39.0" prefWidth="203.0" text="Remover Delito" />
-      <Button layoutX="280.0" layoutY="180.0" mnemonicParsing="false" onAction="#alterarDelitos" prefHeight="39.0" prefWidth="203.0" text="Alterar Delito" />
+      <Button layoutX="280.0" layoutY="180.0" mnemonicParsing="false" onAction="#alterarDelitos" prefHeight="39.0" prefWidth="203.0" text="Visualizar Delitos" />
       <Button layoutX="280.0" layoutY="251.0" mnemonicParsing="false" onAction="#alterarVitima" prefHeight="39.0" prefWidth="203.0" text="Alterar Vitima" />
    </children>
 </AnchorPane>

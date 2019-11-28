@@ -72,7 +72,7 @@ public class cadastroBoletimController {
                 loader.setLocation(getClass().getResource("../View/cadastroDelito.fxml"));
                 Parent fxmlDelito = loader.load();
                 cadastroDelitoController controller = loader.getController();
-                controller.start(cidadao,telefones,enderecoCidadao,boletim,opcao);
+                controller.start(cidadao,telefones,enderecoCidadao,boletim,opcao,1);
                 Main.changeScreen(new Scene(fxmlDelito));
             }
             catch(Exception e){

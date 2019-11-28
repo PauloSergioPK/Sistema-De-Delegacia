@@ -17,7 +17,7 @@
             <DropShadow blurType="GAUSSIAN" height="101.06" radius="38.17" spread="0.09" width="53.62" />
          </effect>
          <children>
-            <Button layoutX="24.0" layoutY="542.0" mnemonicParsing="false" onAction="#voltarBuscas" prefHeight="39.0" prefWidth="203.0" style="-fx-background-color: #c94747; -fx-background-radius: 50;" text="Voltar" textFill="WHITE" AnchorPane.topAnchor="542.0">
+            <Button layoutX="24.0" layoutY="542.0" mnemonicParsing="false" onAction="#voltarUpdate" prefHeight="39.0" prefWidth="203.0" style="-fx-background-color: #c94747; -fx-background-radius: 50;" text="Voltar" textFill="WHITE" AnchorPane.topAnchor="542.0">
                <font>
                   <Font name="Gadugi" size="23.0" />
                </font>

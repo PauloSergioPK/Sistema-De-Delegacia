@@ -230,7 +230,7 @@ public class cadastroSuspeitoController {
             investigado.setCidadao(new Cidadao(textCpf.getText(),textRg.getText(),textDataNascimento.getText(),textNacionalidade.getText(),textSexo.getText(),textEstadoCivil.getText(),textNome.getText(),
                     textProfissao.getText(),textMae.getText(),textPai.getText(),textIdade.getText(),investigado.getEndereco().getIdEndereco()));
             boolean aumento = false;
-            if(!investigado.getCidadao().getCpf().equals("desconhecido")) { //updates dia 27/11 talvez cause erros
+            if(!investigado.getCidadao().getCpf().equals("desconhecido")) { //updates dia 27/11 talvez cause erros, 28/11 concertei os erros KKKKKKKKKKKKKKKKKKKK
                 try{
                     Conexao banco = new Conexao();
                     banco.Conectar("jdbc:postgresql://localhost:5432/Delegacia", "postgres", "123");

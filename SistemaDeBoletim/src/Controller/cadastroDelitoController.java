@@ -73,6 +73,7 @@ public class cadastroDelitoController {
     private Label textDica;
 
     int opcaoCidadao; // 1 para cadastrar, 2 para nao cadastrar
+    int opcaoBoletim; // 1 para cadastrar, 2 para nao cadastrar
 
     private void bairroValido(){
         if(textBairro.getText().equals(""))
@@ -193,14 +194,29 @@ public class cadastroDelitoController {
             else{
                 Conexao banco = new Conexao();
                 banco.Conectar("jdbc:postgresql://localhost:5432/Delegacia", "postgres", "123");
-                banco.inserir(cidadao,enderecoCidadao,telefones,enderecosDeCrimes,investigados,delitos,boletim,opcaoCidadao);
+                banco.inserir(cidadao,enderecoCidadao,telefones,enderecosDeCrimes,investigados,delitos,boletim,opcaoCidadao,opcaoBoletim);
                 banco.Desconectar();
-                FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(getClass().getResource("../View/principalScreen.fxml"));
-                Parent fxmls = loader.load();
-                principalScreenController controller = loader.getController();
-                controller.update(Main.totalBoletins,Main.totalSuspeitos);
-                Main.changeScreen(new Scene(fxmls));
+                if(opcaoBoletim == 1) {
+                    FXMLLoader loader = new FXMLLoader();
+                    loader.setLocation(getClass().getResource("../View/principalScreen.fxml"));
+                    Parent fxmls = loader.load();
+                    principalScreenController controller = loader.getController();
+                    controller.update(Main.totalBoletins, Main.totalSuspeitos);
+                    Main.changeScreen(new Scene(fxmls));
+                }
+                else if(opcaoBoletim == 2){
+                    try{
+                        FXMLLoader loader = new FXMLLoader();
+                        loader.setLocation(getClass().getResource("../View/updateBoletimScreen.fxml"));
+                        Parent scene = loader.load();
+                        updateBoletimController controller = loader.getController();
+                        controller.start(boletim);
+                        Main.changeScreen(new Scene(scene));
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         }
         catch (Exception e){
@@ -260,12 +276,13 @@ public class cadastroDelitoController {
         }
     }
 
-    public void start(Cidadao cidadao,ArrayList<Telefone> telefones, Endereco enderecoCidadao, Boletim boletim,int opcaoCidadao){
+    public void start(Cidadao cidadao,ArrayList<Telefone> telefones, Endereco enderecoCidadao, Boletim boletim,int opcaoCidadao,int opcaoBoletim){
         this.cidadao = cidadao;
         this.telefones = telefones;
         this.enderecoCidadao = enderecoCidadao;
         this.boletim = boletim;
         this.opcaoCidadao = opcaoCidadao;
+        this.opcaoBoletim = opcaoBoletim;
     }
 
 }

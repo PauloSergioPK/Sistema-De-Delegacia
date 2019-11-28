@@ -1,6 +1,11 @@
 package Dao;
 
+import Controller.updateBoletimController;
+import Exec.Main;
 import Model.*;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -44,7 +49,7 @@ public class Conexao {
         }
     }
 
-    public void inserir(Cidadao cidadao, Endereco enderecoCidadao, ArrayList<Telefone> telefones, ArrayList<Endereco> enderecosDeCrimes, ArrayList<Investigado> investigados, ArrayList <Delito> delitos, Boletim b,int opcaoCidadao){
+    public void inserir(Cidadao cidadao, Endereco enderecoCidadao, ArrayList<Telefone> telefones, ArrayList<Endereco> enderecosDeCrimes, ArrayList<Investigado> investigados, ArrayList <Delito> delitos, Boletim b,int opcaoCidadao, int opcaoBoletim){
         try {
             String cadastrarEndereco;
             String cadastrarCidadao;
@@ -67,7 +72,8 @@ public class Conexao {
             }
             String cadastrarBoletim = "insert into Boletim values ("+b.getIdBoletim()+",'"+b.getDataComunicacao()+"','"+b.getDataElaboracao()+"','"+ b.getRelato()+"','"+ b.getIdVitima()+"')";
             //System.out.println(b);
-            this.stmt.executeUpdate(cadastrarBoletim);
+            if(opcaoBoletim == 1)
+                this.stmt.executeUpdate(cadastrarBoletim);
 
             for(Endereco e : enderecosDeCrimes){
                 String numero = e.getNumero();
@@ -130,7 +136,6 @@ public class Conexao {
         catch (Exception e){
             e.printStackTrace();
         }
-
     }
 
 

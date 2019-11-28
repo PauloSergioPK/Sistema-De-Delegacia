@@ -4,7 +4,6 @@ import Dao.Conexao;
 import Exec.Main;
 import Model.Boletim;
 import Model.Delito;
-import Model.Investigado;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,7 +17,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.util.ArrayList;
 
-public class alterarDelitoController {
+public class removerDelitoController {
 
     @FXML
     private TableView<Delito> tabelaBoletins;
@@ -48,6 +47,38 @@ public class alterarDelitoController {
     private TableColumn<Delito,String> colunaFlagrante;
 
     private Boletim boletim;
+
+    @FXML
+    void removerDelito(ActionEvent event) {
+        try {
+            Delito delito = tabelaBoletins.getSelectionModel().getSelectedItem();
+            if(delito != null) {
+                try{
+                    tabelaBoletins.getItems().remove(delito);
+                    Conexao banco = new Conexao();
+                    banco.Conectar("jdbc:postgresql://localhost:5432/Delegacia", "postgres", "123");
+                    ArrayList<String> investigados = new ArrayList<>();
+                    banco.rs = banco.stmt.executeQuery("select investigado from Suspeito where delito in (select idDelito from Delito where boletim = "+boletim.getIdBoletim()+")");
+                    while(banco.rs.next()){
+                        investigados.add(banco.rs.getString("investigado"));
+                    }
+                    banco.stmt.execute("delete from Suspeito where delito = "+delito.getIdDelito()+"");
+                    banco.stmt.execute("delete from Delito where idDelito = "+delito.getIdDelito()+"");
+                    for(String s : investigados){
+                        banco.stmt.execute("select * from delCidadao ('"+s+"')");
+                    }
+                    banco.Desconectar();
+
+                }
+                catch(Exception e){
+                    e.printStackTrace();
+                }
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 
     @FXML
     void voltarUpdate(ActionEvent event) {
@@ -97,6 +128,7 @@ public class alterarDelitoController {
             colunaTipoDeLocal.setCellValueFactory(new PropertyValueFactory<>("tipoDeLocal"));
             colunaFlagrante.setCellValueFactory(new PropertyValueFactory<>("flagrante"));
             tabelaBoletins.setItems(observableListBoletins);
+
 
         }
         catch (Exception e){
