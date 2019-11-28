@@ -7,7 +7,7 @@ Sistema para gerenciar boletins de ocorrencias para a cadeira de fundamentos de 
 - IDE utilizada no desenvolvido : IntelliJ da JetBrains : https://www.jetbrains.com/idea/
 - O database padrao esta setado com nome de : "Delegacia" ,caso queira alterar, lembre-se de configurar em todos os controllers que realizam a chamada
 do metodo "Conectar" para o seu banco.
-- Os comandos dos banco estao em "comandos.TXT"
+- Os comandos do banco estao em "comandos.TXT"
 - As credenciais de login por padrao sao "Admin" e "Admin", caso queira muda-los va no "loginController" e modifique la :)  .
 - O sistema de banco usado foi o PostgreSQL
 
