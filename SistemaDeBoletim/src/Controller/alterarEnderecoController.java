@@ -3,8 +3,8 @@ package Controller;
 import Dao.Conexao;
 import Exec.Main;
 import Model.Boletim;
+import Model.Cidadao;
 import Model.Endereco;
-import Model.Suspeito;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,8 +18,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.util.ArrayList;
 
-public class mostrarEnderecoController {
-
+public class alterarEnderecoController {
     @FXML
     private TableView<Endereco> tabelaBoletins;
 
@@ -54,40 +53,19 @@ public class mostrarEnderecoController {
     private TableColumn<Endereco, String> colunaBairro;
 
     @FXML
-    void listarDelitos(ActionEvent event) {
-        try {
-            Endereco endereco = tabelaBoletins.getSelectionModel().getSelectedItem();
-            if(endereco != null) {
-                try{
-                    FXMLLoader loader = new FXMLLoader();
-                    loader.setLocation(getClass().getResource("../View/mostrarDelito.fxml"));
-                    Parent fxmls = loader.load();
-                    mostrarDelitosController controller = loader.getController();
-                    String query = "select * from Delito where localOcorrencia = "+endereco.getIdEndereco()+"";
-                    controller.start(query);
-                    Main.changeScreen(new Scene(fxmls));
-                }
-                catch(Exception e){
-                    e.printStackTrace();
-                }
-            }
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    void listarSuspeitos(ActionEvent event) { //ajeitar
+    void updateEndereco(ActionEvent event) { //ajeitar
 
     }
 
     @FXML
     void voltarBuscas(ActionEvent event) {
         try{
-            Parent fxmlbuscas = FXMLLoader.load(getClass().getResource("../View/menuBuscas.fxml"));
-            Scene busca = new Scene(fxmlbuscas);
-            Main.changeScreen(busca);
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("../View/alterarCidadao.fxml"));
+            Parent scene = loader.load();
+            alterarCidadaoController controller = loader.getController();
+            controller.start(boletim);
+            Main.changeScreen(new Scene(scene));
         }
         catch (Exception e){
             e.printStackTrace();
@@ -96,13 +74,14 @@ public class mostrarEnderecoController {
 
     private ArrayList<Endereco> enderecos = new ArrayList<>();
     private ObservableList<Endereco> observableListBoletins;
+    private Boletim boletim;
 
-    public void start(String query){
+    public void start(Boletim boletim, Cidadao cidadao){
         try{
             Conexao banco = new Conexao();
             banco.Conectar("jdbc:postgresql://localhost:5432/Delegacia", "postgres", "123");
-            System.out.println(query);
-            banco.rs = banco.stmt.executeQuery(query);
+            this.boletim = boletim;
+            banco.rs = banco.stmt.executeQuery("select * from Endereco where idEndereco ="+cidadao.getEndereco()+"");
             while(banco.rs.next()){
                 Endereco aux = new Endereco();
                 aux.setIdEndereco(banco.rs.getInt("idEndereco"));

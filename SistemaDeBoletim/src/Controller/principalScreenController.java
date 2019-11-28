@@ -30,7 +30,14 @@ public class principalScreenController implements Initializable {
 
     @FXML
     void atualizarOcorrencia(ActionEvent event) {
-
+        try{
+            Parent fxmlupdate = FXMLLoader.load(getClass().getResource("../View/alterarBoletimScreen.fxml"));
+            Scene update = new Scene(fxmlupdate);
+            Main.changeScreen(update);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -90,7 +97,7 @@ public class principalScreenController implements Initializable {
             banco.Conectar("jdbc:postgresql://localhost:5432/Delegacia", "postgres", "123");
             String resultBoletins = "Select max(idboletim) from Boletim";
             String resultSuspeitos = "Select max(idSuspeito) from Suspeito";
-            String resultEnderecos = "Select max(idendereco) from Endereco";
+            String resultEnderecos = "Select max(idEndereco) from Endereco";
             String resultCidadaos = "select count (cpf) from Cidadao";
             String resultTelefones = "select count (numTelefone) from Telefone";
             String resultDelitos = "Select max(idDelito) from Delito";

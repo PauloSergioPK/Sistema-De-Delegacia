@@ -1,3 +1,10 @@
+drop table boletim cascade;
+drop table cidadao cascade;
+drop table endereco cascade;
+drop table telefone cascade;
+drop table suspeito cascade;
+drop table delito cascade;
+
 create table Endereco(
 	idEndereco integer,
 	cep varchar(30),
@@ -79,11 +86,13 @@ inner join Suspeito S on (S.delito = D.iddelito) group by D.iddelito);
 
 -- VERIFICA SE O CIDADAO ESTÁ VINCULADO A ALGUM BOLETIM (É VITIMA OU SUSPEITO)
 
-CREATE FUNCTION verCidadao(cpf varchar) 
+CREATE OR REPLACE FUNCTION verCidadao(cpf varchar) 
 Returns bool AS $$
     BEGIN
         IF (select count(vitima) from boletim where vitima = cpf) > 0 THEN
             RETURN true;
+        ELSEIF (select count(investigado) from Suspeito where investigado = cpf) > 0 THEN
+	    RETURN true;
         ELSE
             Return false;
         END IF;
@@ -92,7 +101,7 @@ $$ LANGUAGE plpgsql;
 
 -- DELETA O CIDADAO E SEUS NUMEROS DE TELEFONE CASO CASO ELE NÃO ESTEJA CADASTRADO COMO VITIMA OU SUSPEITO EM ALGUM BOLETIM
 
-CREATE FUNCTION delCidadao (cpfi varchar)
+CREATE OR REPLACE FUNCTION delCidadao (cpfi varchar)
 Returns void AS $$
     DECLARE ed int; 
     BEGIN
@@ -124,11 +133,3 @@ RETURNS void AS $$
         perform delCidadao(vit);
     END;
 $$ LANGUAGE plpgsql;
-
-
-drop table boletim cascade;
-drop table cidadao cascade;
-drop table endereco cascade;
-drop table telefone cascade;
-drop table suspeito cascade;
-drop table delito cascade;

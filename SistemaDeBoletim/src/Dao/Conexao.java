@@ -106,7 +106,7 @@ public class Conexao {
                     this.stmt.executeUpdate(cadastrarEndereco);
                     cadastrarCidadao = "insert into Cidadao" +
                             " values ('"+i.getCidadao().getCpf()+"','"+i.getCidadao().getRg()+"','"+i.getCidadao().getDataNascimento()+"','"+i.getCidadao().getNacionalidade()+"','"+i.getCidadao().getSexo()+"','"+i.getCidadao().getEstadoCivil()+"','"+
-                            i.getCidadao().getNome()+"','"+i.getCidadao().getProfissao()+"','"+i.getCidadao().getNomeDaMae()+"','"+i.getCidadao().getNomeDoPai()+"',"+i.getCidadao().getIdade()+",'"+enderecoCidadao.getIdEndereco()+"')";
+                            i.getCidadao().getNome()+"','"+i.getCidadao().getProfissao()+"','"+i.getCidadao().getNomeDaMae()+"','"+i.getCidadao().getNomeDoPai()+"',"+i.getCidadao().getIdade()+","+i.getCidadao().getEndereco()+")";
                     //System.out.println(cadastrarCidadao);
                     this.stmt.executeUpdate(cadastrarCidadao);
                     for(Telefone t : i.getTelefones()){

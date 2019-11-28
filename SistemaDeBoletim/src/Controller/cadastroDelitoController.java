@@ -243,8 +243,10 @@ public class cadastroDelitoController {
                 Delito delito = new Delito(Main.totalDelitos+1,textEspecie.getText(),textNatureza.getText(),flagrante,textDataOcorrencia.getText(),endereco.getIdEndereco(),textTipoLocal.getText(),boletim.getIdBoletim());
                 Main.totalDelitos++;
                 Investigado aux = cadastroSuspeitoController.display(delito.getIdDelito());
-                if(aux != null)
+                if(aux != null) {
                     investigados.add(aux);
+                    System.out.println(investigados.get(0).getCidadao().getEndereco());
+                }
                 delitos.add(delito);
                 enderecosDeCrimes.add(endereco);
                 limpaTela();

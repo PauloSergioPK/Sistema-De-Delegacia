@@ -72,6 +72,7 @@ public class mostrarBoletimController implements Initializable {
     void listarSuspeitos(ActionEvent event) {
         try {
             Boletim boletim = tabelaBoletins.getSelectionModel().getSelectedItem();
+
             if(boletim != null) {
                 try{
                     FXMLLoader loader = new FXMLLoader();

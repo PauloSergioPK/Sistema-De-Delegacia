@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="657.0" prefWidth="1177.0" style="-fx-background-color: #131313;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.updateBoletimController">
+   <children>
+      <AnchorPane layoutX="249.0" layoutY="618.0" prefHeight="39.0" prefWidth="929.0" style="-fx-background-color: #8b0303; -fx-opacity: 0.8;" />
+      <AnchorPane prefHeight="658.0" prefWidth="250.0" style="-fx-background-color: #141414;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <effect>
+            <DropShadow blurType="GAUSSIAN" height="101.06" radius="38.17" spread="0.09" width="53.62" />
+         </effect>
+         <children>
+            <Button layoutX="24.0" layoutY="542.0" mnemonicParsing="false" onAction="#finalizarAlteracao" prefHeight="39.0" prefWidth="203.0" style="-fx-background-color: #c94747; -fx-background-radius: 50;" text="Finalizar" textFill="WHITE" AnchorPane.topAnchor="542.0">
+               <font>
+                  <Font name="Gadugi" size="23.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="170.0" fitWidth="163.0" layoutX="42.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Resources/f9378cddaa4d327b39cca8eaad984fe6.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <TextArea fx:id="relato" layoutX="535.0" layoutY="36.0" prefHeight="567.0" prefWidth="619.0" />
+      <Button layoutX="280.0" layoutY="37.0" mnemonicParsing="false" onAction="#adiconarDelito" prefHeight="39.0" prefWidth="203.0" text="Adicionar Delito" />
+      <Button layoutX="280.0" layoutY="108.0" mnemonicParsing="false" onAction="#removerDelito" prefHeight="39.0" prefWidth="203.0" text="Remover Delito" />
+      <Button layoutX="280.0" layoutY="180.0" mnemonicParsing="false" onAction="#alterarDelitos" prefHeight="39.0" prefWidth="203.0" text="Alterar Delito" />
+      <Button layoutX="280.0" layoutY="251.0" mnemonicParsing="false" onAction="#alterarVitima" prefHeight="39.0" prefWidth="203.0" text="Alterar Vitima" />
+   </children>
+</AnchorPane>

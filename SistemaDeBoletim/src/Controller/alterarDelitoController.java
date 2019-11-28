@@ -17,7 +17,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.util.ArrayList;
 
-public class mostrarDelitosController {
+public class alterarDelitoController {
 
     @FXML
     private TableView<Delito> tabelaBoletins;
@@ -46,8 +46,10 @@ public class mostrarDelitosController {
     @FXML
     private TableColumn<Delito,String> colunaFlagrante;
 
+    private Boletim boletim;
+
     @FXML
-    void listarEndereco(ActionEvent event) {
+    void alterarEndereco(ActionEvent event) {
         try {
             Delito delito = tabelaBoletins.getSelectionModel().getSelectedItem();
             if(delito != null) {
@@ -71,7 +73,7 @@ public class mostrarDelitosController {
     }
 
     @FXML
-    void listarSuspeito(ActionEvent event) {
+    void alterarSuspeito(ActionEvent event) {
         try {
             Delito delito = tabelaBoletins.getSelectionModel().getSelectedItem();
             if(delito != null) {
@@ -80,7 +82,7 @@ public class mostrarDelitosController {
                     loader.setLocation(getClass().getResource("../View/mostrarSuspeitos.fxml"));
                     Parent fxmls = loader.load();
                     mostrarSuspeitoController controller = loader.getController();
-                    String query = "select * from Suspeito where delito = "+delito.getIdDelito()+"";
+                    String query = "select * from Suspeito where delito in (select idDelito from Delito where boletim = "+delito.getIdBoletim()+" )"+"";
                     controller.start(query);
                     Main.changeScreen(new Scene(fxmls));
                 }
@@ -95,11 +97,14 @@ public class mostrarDelitosController {
     }
 
     @FXML
-    void voltarBuscas(ActionEvent event) {
+    void voltarUpdate(ActionEvent event) {
         try{
-            Parent fxmlbuscas = FXMLLoader.load(getClass().getResource("../View/menuBuscas.fxml"));
-            Scene busca = new Scene(fxmlbuscas);
-            Main.changeScreen(busca);
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("../View/updateBoletimScreen.fxml"));
+            Parent scene = loader.load();
+            updateBoletimController controller = loader.getController();
+            controller.start(boletim);
+            Main.changeScreen(new Scene(scene));
         }
         catch (Exception e){
             e.printStackTrace();
@@ -109,12 +114,12 @@ public class mostrarDelitosController {
     private ArrayList<Delito> delitos = new ArrayList<>();
     private ObservableList<Delito> observableListBoletins;
 
-    public void start(String query){
+    public void start(Boletim boletim){
         try{
+            this.boletim = boletim;
             Conexao banco = new Conexao();
             banco.Conectar("jdbc:postgresql://localhost:5432/Delegacia", "postgres", "123");
-            System.out.println(query);
-            banco.rs = banco.stmt.executeQuery(query);
+            banco.rs = banco.stmt.executeQuery("select * from Delito where boletim = "+boletim.getIdBoletim()+"");
             while(banco.rs.next()){
                 Delito aux = new Delito();
                 aux.setIdBoletim(banco.rs.getInt("boletim"));

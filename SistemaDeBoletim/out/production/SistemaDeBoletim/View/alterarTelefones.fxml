@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="657.0" prefWidth="1177.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.mostrarSuspeitoController">
+<AnchorPane prefHeight="657.0" prefWidth="1177.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.alterarTelefoneController">
    <children>
       <AnchorPane layoutX="249.0" layoutY="624.0" prefHeight="39.0" prefWidth="945.0" style="-fx-background-color: #8b0303; -fx-opacity: 0.8;" />
       <AnchorPane prefHeight="658.0" prefWidth="250.0" style="-fx-background-color: #141414;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -31,21 +31,19 @@
       </AnchorPane>
       <TableView fx:id="tabelaBoletins" layoutX="265.0" layoutY="14.0" prefHeight="542.0" prefWidth="896.0">
         <columns>
-          <TableColumn fx:id="colunaIdSuspeito" prefWidth="130.0" text="ID" />
-            <TableColumn fx:id="colunaCpfSuspeito" prefWidth="133.0" text="CPF do Suspeito" />
-            <TableColumn fx:id="colunaDescricao" prefWidth="122.0" text="Descricao do Suspeito" />
-          <TableColumn fx:id="colunaIdDelito" prefWidth="138.0" text="Numero do Delito" />
+          <TableColumn fx:id="colunaNumero" prefWidth="130.0" text="Numero" />
+            <TableColumn fx:id="colunaCpf" prefWidth="133.0" text="CPF do Cidadao" />
         </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Button layoutX="814.0" layoutY="569.0" mnemonicParsing="false" onAction="#listarSuspeitos" prefHeight="37.0" prefWidth="174.0" style="-fx-background-color: #c94747; -fx-background-radius: 15;" text="Detalhes do Suspeito" textFill="WHITE">
+      <Button layoutX="1013.0" layoutY="569.0" mnemonicParsing="false" onAction="#removerTelefone" style="-fx-background-color: #c94747; -fx-background-radius: 15;" text="Remover telefone" textFill="WHITE">
          <font>
             <Font size="16.0" />
          </font>
       </Button>
-      <Button layoutX="1031.0" layoutY="569.0" mnemonicParsing="false" onAction="#listarDelitos" style="-fx-background-color: #c94747; -fx-background-radius: 15;" text="Listar delitos" textFill="WHITE">
+      <Button layoutX="825.0" layoutY="569.0" mnemonicParsing="false" onAction="#adicionarTelefone" style="-fx-background-color: #c94747; -fx-background-radius: 15;" text="Adicionar telefone" textFill="WHITE">
          <font>
             <Font size="16.0" />
          </font>

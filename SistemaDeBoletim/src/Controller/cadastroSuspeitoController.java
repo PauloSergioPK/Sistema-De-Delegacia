@@ -224,68 +224,65 @@ public class cadastroSuspeitoController {
             rgValido();
             ruaValido();
             sexoValido();
+            System.out.println(Main.totalEndereco);
             investigado.setEndereco(new Endereco(Main.totalEndereco+1,textCep.getText(),textCidade.getText(),textEstado.getText(),textPais.getText(),textRua.getText(),textNumero.getText(),
                     textNumeroResidencia.getText(),textComplemento.getText(),textBairro.getText()));
             investigado.setCidadao(new Cidadao(textCpf.getText(),textRg.getText(),textDataNascimento.getText(),textNacionalidade.getText(),textSexo.getText(),textEstadoCivil.getText(),textNome.getText(),
                     textProfissao.getText(),textMae.getText(),textPai.getText(),textIdade.getText(),investigado.getEndereco().getIdEndereco()));
+            boolean aumento = false;
             if(!investigado.getCidadao().getCpf().equals("desconhecido")) { //updates dia 27/11 talvez cause erros
-                Cidadao aux= new Cidadao();
-                aux.setCpf("valor");
                 try{
                     Conexao banco = new Conexao();
                     banco.Conectar("jdbc:postgresql://localhost:5432/Delegacia", "postgres", "123");
                     banco.rs = banco.stmt.executeQuery("select * from Cidadao where cpf = '"+investigado.getCidadao().getCpf()+ "'");
+                    System.out.println("antes do while");
                     while(banco.rs.next()) {
-                        aux.setCpf(banco.rs.getString("cpf"));
-                        aux.setDataNascimento(banco.rs.getString("dataNascimento"));
-                        aux.setRg(banco.rs.getString("rg"));
-                        aux.setNacionalidade(banco.rs.getString("nacionalidade"));
-                        aux.setSexo(banco.rs.getString("sexo"));
-                        aux.setEstadoCivil(banco.rs.getString("estadoCivil"));
-                        aux.setNome(banco.rs.getString("nome"));
-                        aux.setProfissao(banco.rs.getString("profissao"));
-                        aux.setNomeDaMae(banco.rs.getString("nomeDaMae"));
-                        aux.setNomeDoPai(banco.rs.getString("nomeDoPai"));
-                        aux.setIdade(banco.rs.getString("idade"));
-                        aux.setEndereco(banco.rs.getInt("endereco"));
+                        investigado.getCidadao().setCpf(banco.rs.getString("cpf"));
+                        investigado.getCidadao().setDataNascimento(banco.rs.getString("dataNascimento"));
+                        investigado.getCidadao().setRg(banco.rs.getString("rg"));
+                        investigado.getCidadao().setNacionalidade(banco.rs.getString("nacionalidade"));
+                        investigado.getCidadao().setSexo(banco.rs.getString("sexo"));
+                        investigado.getCidadao().setEstadoCivil(banco.rs.getString("estadoCivil"));
+                        investigado.getCidadao().setNome(banco.rs.getString("nome"));
+                        investigado.getCidadao().setProfissao(banco.rs.getString("profissao"));
+                        investigado.getCidadao().setNomeDaMae(banco.rs.getString("nomeDaMae"));
+                        investigado.getCidadao().setNomeDoPai(banco.rs.getString("nomeDoPai"));
+                        investigado.getCidadao().setIdade(banco.rs.getString("idade"));
+                        investigado.getCidadao().setEndereco(banco.rs.getInt("endereco"));
+                        investigado.setCadastro(false);
                     }
-                    if(aux.getCpf() != null && !aux.getCpf().equals("valor")) {
-                        investigado.setCidadao(aux);
-                        Endereco ad = new Endereco();
-                        ad.setCidade("");
-                        banco.rs = banco.stmt.executeQuery("select * from Endereco where idEndereco = "+aux.getEndereco()+"");
-                        while(banco.rs.next()){
-                            ad.setIdEndereco(banco.rs.getInt("idEndereco"));
-                            ad.setCep(banco.rs.getString("cep"));
-                            ad.setCidade(banco.rs.getString("cidade"));
-                            ad.setEstado(banco.rs.getString("estado"));
-                            ad.setPais(banco.rs.getString("pais"));
-                            ad.setNumero(banco.rs.getString("numero"));
-                            ad.setNumeroResidencia(banco.rs.getString("numeroResidencia"));
-                            ad.setBairro(banco.rs.getString("bairro"));
-                            ad.setComplemento(banco.rs.getString("complemento"));
-                            ad.setRua(banco.rs.getString("rua"));
-                        }
-                        if(ad.getCidade() != null && !ad.getCidade().equals("")){
-                            ArrayList<Telefone> telefones = new ArrayList<>();
-                            banco.rs = banco.stmt.executeQuery("select * from Telefone where cidadao = '"+aux.getCpf()+"'");
-                            while(banco.rs.next()){
-                                Telefone te = new Telefone();
-                                te.setCpf(banco.rs.getString("cidadao"));
-                                te.setNumTelefone(banco.rs.getString("numTelefone"));
-                                telefones.add(te);
-                            }
-                            investigado.setEndereco(ad);
-                            investigado.setTelefones(telefones);
-                            investigado.setCadastro(false);
-                            investigado.getSuspeito().setCpf(aux.getCpf());
-                        }
+
+                    banco.rs = banco.stmt.executeQuery("select * from Endereco where idEndereco = "+investigado.getCidadao().getEndereco()+"");
+                    while(banco.rs.next()){
+                        investigado.getEndereco().setIdEndereco(banco.rs.getInt("idEndereco"));
+                        investigado.getEndereco().setCep(banco.rs.getString("cep"));
+                        investigado.getEndereco().setCidade(banco.rs.getString("cidade"));
+                        investigado.getEndereco().setEstado(banco.rs.getString("estado"));
+                        investigado.getEndereco().setPais(banco.rs.getString("pais"));
+                        investigado.getEndereco().setNumero(banco.rs.getString("numero"));
+                        investigado.getEndereco().setNumeroResidencia(banco.rs.getString("numeroResidencia"));
+                        investigado.getEndereco().setBairro(banco.rs.getString("bairro"));
+                        investigado.getEndereco().setComplemento(banco.rs.getString("complemento"));
+                        investigado.getEndereco().setRua(banco.rs.getString("rua"));
                     }
+                    ArrayList<Telefone> telefones = new ArrayList<>();
+                    banco.rs = banco.stmt.executeQuery("select * from Telefone where cidadao = '"+investigado.getCidadao().getCpf()+"'");
+                    while(banco.rs.next()){
+                        Telefone te = new Telefone();
+                        te.setCpf(banco.rs.getString("cidadao"));
+                        te.setNumTelefone(banco.rs.getString("numTelefone"));
+                        telefones.add(te);
+                    }
+                    investigado.setTelefones(telefones);
+                    investigado.getSuspeito().setCpf(investigado.getCidadao().getCpf());
+                    aumento = true;
                     banco.Desconectar();
                 }
                 catch (Exception e){
                     e.printStackTrace();
                 }
+            }
+            if(aumento){
                 Main.totalCidadao++;
                 Main.totalEndereco++;
             }
@@ -307,6 +304,7 @@ public class cadastroSuspeitoController {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            System.out.println(investigado.getCidadao().getEndereco());
         }
         else{
             avisoSuspeito.setText("Digite uma descricao valida");

@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.ResourceBundle;
 
-public class removerBoletimController implements Initializable {
+public class alterarBoletimController implements Initializable {
 
     @FXML
     private TableView<Boletim> tabelaBoletins;
@@ -47,7 +47,7 @@ public class removerBoletimController implements Initializable {
     private ObservableList<Boletim> observableListBoletins;
 
     @FXML
-    void finalizarRemocao(ActionEvent event) {
+    void finalizarAlteracao(ActionEvent event) {
         try{
             Parent fxmlprincipal = FXMLLoader.load(getClass().getResource("../View/principalScreen.fxml"));
             Scene inicio = new Scene(fxmlprincipal);
@@ -59,23 +59,16 @@ public class removerBoletimController implements Initializable {
     }
 
     @FXML
-    void removerSelecionado(ActionEvent event) {
+    void alterarSelecionado(ActionEvent event) {
         try {
             Boletim boletim = tabelaBoletins.getSelectionModel().getSelectedItem();
             if(boletim != null) {
-                tabelaBoletins.getItems().remove(boletim);
-                Conexao banco = new Conexao();
-                banco.Conectar("jdbc:postgresql://localhost:5432/Delegacia", "postgres", "123");
-                ArrayList<String> investigados = new ArrayList<>();
-                banco.rs = banco.stmt.executeQuery("select investigado from Suspeito where delito in (select idDelito from Delito where boletim = "+boletim.getIdBoletim()+")");
-                while(banco.rs.next()){
-                    investigados.add(banco.rs.getString("investigado"));
-                }
-                banco.stmt.execute("select * from delBoletim (" + boletim.getIdBoletim() + ")");
-                for(String s : investigados){
-                    banco.stmt.execute("select * from delCidadao ('"+s+"')");
-                }
-                banco.Desconectar();
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("../View/updateBoletimScreen.fxml"));
+                Parent scene = loader.load();
+                updateBoletimController controller = loader.getController();
+                controller.start(boletim);
+                Main.changeScreen(new Scene(scene));
             }
         }
         catch (Exception e){
