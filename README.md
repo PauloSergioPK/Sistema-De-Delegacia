@@ -10,6 +10,7 @@ do metodo "Conectar" para o seu banco.
 - Os comandos do banco estao em "comandos.TXT"
 - As credenciais de login por padrao sao "Admin" e "Admin", caso queira muda-los va no "loginController" e modifique la :)  .
 - O sistema de banco usado foi o PostgreSQL
+- OBS : o sistema ainda esta na versao alpha da alpha da alpha, mas as funcionalidades implementadas ja estao funcionando.
 
 
 ## Configurando driver no IntelliJ
