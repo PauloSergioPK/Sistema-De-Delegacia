@@ -42,6 +42,9 @@
             <TableColumn fx:id="colunaComplemento" prefWidth="151.0" text="Complemento" />
             <TableColumn fx:id="colunaBairro" prefWidth="107.0" text="Bairro" />
         </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
       </TableView>
       <Button layoutX="863.0" layoutY="569.0" mnemonicParsing="false" onAction="#listarSuspeitos" style="-fx-background-color: #c94747; -fx-background-radius: 15;" text="Listar cidadao" textFill="WHITE">
          <font>

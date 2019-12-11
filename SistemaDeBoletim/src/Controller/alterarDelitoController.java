@@ -64,6 +64,23 @@ public class alterarDelitoController {
         }
     }
 
+    @FXML
+    void mostrarSuspeito(ActionEvent event) {
+        try{
+            Delito delito = tabelaBoletins.getSelectionModel().getSelectedItem();
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("../View/mostrarSuspeito.fxml"));
+            Parent scene = loader.load();
+            mostrarCriminosoController controller = loader.getController();
+            String query = "select * from Suspeito where delito = "+delito.getIdDelito()+"";
+            controller.start(query,boletim);
+            Main.changeScreen(new Scene(scene));
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
     private ArrayList<Delito> delitos = new ArrayList<>();
     private ObservableList<Delito> observableListBoletins;
 

@@ -1,0 +1,16 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="SistemaDeBoletim">
+    <output-path>$PROJECT_DIR$/out/artifacts/SistemaDeBoletim</output-path>
+    <root id="archive" name="SistemaDeBoletim.jar">
+      <element id="archive" name="SistemaDeBoletim.jar">
+        <element id="module-output" name="SistemaDeBoletim" />
+        <element id="directory" name="META-INF">
+          <element id="file-copy" path="$PROJECT_DIR$/src/Exec/META-INF/MANIFEST.MF" />
+        </element>
+      </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/src/Exec/META-INF/MANIFEST.MF" />
+      </element>
+    </root>
+  </artifact>
+</component>

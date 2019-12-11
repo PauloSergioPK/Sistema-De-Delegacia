@@ -123,12 +123,12 @@ public class alterarCidadaoController {
     private ObservableList<Cidadao> observableListBoletins;
     private Boletim boletim;
 
-    public void start(Boletim boletim){
+    public void start(String query,Boletim boletim){
         try{
             Conexao banco = new Conexao();
             this.boletim = boletim;
             banco.Conectar("jdbc:postgresql://localhost:5432/Delegacia", "postgres", "123");
-            banco.rs = banco.stmt.executeQuery("select * from Cidadao where cpf in (select vitima from Boletim where idBoletim = "+boletim.getIdBoletim()+")");
+            banco.rs = banco.stmt.executeQuery(query);
             while(banco.rs.next()){
                 Cidadao aux = new Cidadao();
                 aux.setCpf(banco.rs.getString("cpf"));

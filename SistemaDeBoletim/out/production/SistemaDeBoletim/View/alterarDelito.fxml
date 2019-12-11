@@ -44,5 +44,10 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
+      <Button layoutX="1001.0" layoutY="568.0" mnemonicParsing="false" onAction="#mostrarSuspeito" prefHeight="39.0" prefWidth="163.0" style="-fx-background-color: #c94747; -fx-background-radius: 50;" text="Mostrar suspeito" textFill="WHITE">
+         <font>
+            <Font name="Gadugi" size="18.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
