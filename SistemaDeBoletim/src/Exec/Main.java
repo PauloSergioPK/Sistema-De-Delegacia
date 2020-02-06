@@ -39,15 +39,6 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
-    /*
-    public static void changeScreen(String scr){
-        if(scr == "logou") {
-            stage.setScene(principalScreen);
-            stage.show();
-        }
-    }
-
-     */
 
     public static void changeScreen(Scene cena){
         stage.setScene(cena);

@@ -36,7 +36,7 @@ public class alterarTelefoneController {
             loader.setLocation(getClass().getResource("../View/alterarCidadao.fxml"));
             Parent scene = loader.load();
             alterarCidadaoController controller = loader.getController();
-            String query = "select * from Cidadao where cpf = "+cidadao.getCpf()+"";
+            String query = "select * from Cidadao where cpf = '"+cidadao.getCpf()+"'";
             controller.start(query,boletim);
             Main.changeScreen(new Scene(scene));
         }
